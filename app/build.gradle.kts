@@ -7,7 +7,6 @@ android {
     compileSdkVersion(29)
 
     defaultConfig {
-        // 21 -> 24 because weird leakcanary icon issue?
         minSdkVersion(21)
         targetSdkVersion(29)
     }
@@ -24,10 +23,28 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    sourceSets.configureEach {
+        java.srcDir("src/$name/kotlin")
+    }
 }
 
 dependencies {
     implementation(platform(project(":platform")))
+    implementation(kotlin("stdlib"))
+
+    implementation(project(":context-lib"))
+
+    implementation("androidx.appcompat:appcompat")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android")
+
+    implementation("androidx.ui:ui-tooling")
+    implementation("androidx.ui:ui-layout")
+    implementation("androidx.ui:ui-material")
+    implementation("androidx.ui:ui-text")
+    implementation("androidx.ui:ui-foundation")
+    implementation("androidx.ui:ui-framework")
 }
